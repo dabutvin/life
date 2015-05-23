@@ -7,4 +7,4 @@
 /// <reference path="lib/hammer.js/hammer.js" />
 /// <reference path="lib/bootstrap/js/bootstrap.js" />
 /// <reference path="scripts/script.js" />
-/// <reference path="lib/bootstrap-slider/bootstrap-slider - copy.min.js" />
+/// <reference path="lib/bootstrap-slider/bootstrap-slider.min.js" />
