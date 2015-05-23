@@ -7,6 +7,6 @@
     "jquery-validation": "1.11.1",
     "jquery-validation-unobtrusive": "3.2.2",
     "hammer.js": "2.0.4",
-    "bootstrap-touch-carousel": "0.8.0"
+    "seiyria-bootstrap-slider": "4.8.3"
   }
 }

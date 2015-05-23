@@ -10,8 +10,13 @@ for (var row = 0; row < rows; row++) {
     }
 }
 
+var slider = new Slider('#speedSlider', {
+    formatter: function (value) {
+        return 'Interval: ' + value + ' ms';
+    }
+});
+
 var stepsEnabled = false;
-setInterval(doit, 1000);
 
 $(document).ready(function () {
     var container = $("#container");
@@ -28,8 +33,8 @@ $(document).ready(function () {
 
     $(".start").on("click", function (e) {
         e.preventDefault();
-        doit();
         stepsEnabled = true;
+        doit();
     });
 
     $(".stop").on("click", function (e) {
@@ -66,6 +71,7 @@ function doit() {
 
         // update after we're done
         updateUI();
+        setTimeout(doit, slider.getValue());
     }
 };
 
