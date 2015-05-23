@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "Life"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-Life-5a1dd170-9be7-4f95-9d84-fa12f040e7e4;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}
