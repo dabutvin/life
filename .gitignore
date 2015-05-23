@@ -196,6 +196,6 @@ FakesAssemblies/
 *.opt
 
 artifacts
-
+PublishProfiles
 bower_components
 node_modules
