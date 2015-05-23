@@ -1,5 +1,5 @@
 ﻿var rows = 40,
-    cols = 40,
+    cols = 50,
     cache = new Array(rows);
 
 for (var row = 0; row < rows; row++) {
@@ -10,8 +10,11 @@ for (var row = 0; row < rows; row++) {
     }
 }
 
+var stepsEnabled = false;
+setInterval(doit, 1000);
+
 $(document).ready(function () {
-    var container = $(".row");
+    var container = $("#container");
     for (var row = 0; row < rows; row++) {
         for (var col = 0; col < cols; col++) {
             container.append("<div class='box' data-row='" + row + "' data-col='" + col + "'></div>");
@@ -25,38 +28,45 @@ $(document).ready(function () {
 
     $(".start").on("click", function (e) {
         e.preventDefault();
-        //$(".box").off("click");
         doit();
-        setInterval(doit, 1000);
+        stepsEnabled = true;
+    });
+
+    $(".stop").on("click", function (e) {
+        e.preventDefault();
+        stepsEnabled = false;
     });
 });
 
 function doit() {
-    // snapshot
-    var localCache = cache.slice(0);
+    if (stepsEnabled) {
+        // snapshot
+        var snapshotCache = cache.map(function (arr) {
+            return arr.slice(0);
+        });
 
-    for (var row = 0; row < rows; row++) {
-        for (var col = 0; col < cols; col++) {
-            if (localCache[row][col]) {
-                // alive
-                var matched = numNeighborsAlive(row, col, localCache);
-                if (matched !== 3) {
-                    localCache[row][col] = 0;
-                }
-            } else {
-                // dead - is there 3 neighbors?
+        for (var row = 0; row < rows; row++) {
+            for (var col = 0; col < cols; col++) {
+                if (snapshotCache[row][col]) {
+                    // alive
+                    var matched = numNeighborsAlive(row, col, snapshotCache);
+                    if (matched !== 3) {
+                        cache[row][col] = 0;
+                    }
+                } else {
+                    // dead - is there 3 neighbors?
 
-                var matched = numNeighborsAlive(row, col, localCache);
-                if (matched > 2) {
-                    localCache[row][col] = 1;
+                    var matched = numNeighborsAlive(row, col, snapshotCache);
+                    if (matched > 2) {
+                        cache[row][col] = 1;
+                    }
                 }
             }
         }
-    }
 
-    // update after we're done
-    cache = localCache;
-    updateUI();
+        // update after we're done
+        updateUI();
+    }
 };
 
 function updateUI() {
